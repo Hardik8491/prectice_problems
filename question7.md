@@ -260,9 +260,3 @@ print(max_word)
 
 ```
 
----
-
-If you want next 🔥:
-- I can make a **single PDF with ALL your questions**
-- Or give **Top 20 TCS coding questions (very important)**
-```
