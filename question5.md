@@ -1,8 +1,4 @@
-Here’s a **complete Markdown-style note** with **problem statement, input/output, and multiple solutions (all common approaches)** 👇
 
----
-
-```md
 # 📘 Reverse Words in a String (All Approaches)
 
 ---
