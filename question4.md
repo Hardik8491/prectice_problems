@@ -1,4 +1,4 @@
-# 📘 Practice Problems (TCS / Coding Round)
+# 📘 Practice Problems
 
 ---
 
