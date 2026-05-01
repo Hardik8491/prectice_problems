@@ -13,6 +13,7 @@ Welcome to the **prectice_problems** repository. This project contains a curated
 | **Question 5** | Problem Solving | [View Question 5](https://github.com/Hardik8491/prectice_problems/blob/main/question5.md) |
 | **Question 6** | Pangram & Matrix Rotation | [View Question 6](https://github.com/Hardik8491/prectice_problems/blob/main/question6.md) |
 | **Question 7** | Refined Challenges | [View Question 7](https://github.com/Hardik8491/prectice_problems/blob/main/question7.md) |
+| **Question 9** | OOPS Challenges | [View Question 8](https://github.com/Hardik8491/prectice_problems/blob/main/question8.md) |
 
 ---
 
