@@ -1,8 +1,3 @@
-
-# 📘 Practice Problems (Palindrome + Word Count)
-
----
-
 ## 🔹 Question 1: Print All Palindrome Strings
 
 ### 📝 Problem Statement  
@@ -19,9 +14,11 @@ malayalam
 radar
 nitish
 
-```id="q1-in"
 
+```id="q1-in"
+```
 ---
+
 
 ### 📤 Output
 ```
@@ -32,6 +29,7 @@ radar
 ````id="q1-out"
 
 ---
+```
 
 # 💻 All Solutions
 
