@@ -1,8 +1,4 @@
-Here’s your **complete Markdown (.md) content** with **Problem Statement + Input/Output + ALL common solutions** 👇
 
----
-
-```md id="palindrome-wordcount-full"
 # 📘 Practice Problems (Palindrome + Word Count)
 
 ---
