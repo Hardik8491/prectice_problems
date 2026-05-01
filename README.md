@@ -30,10 +30,3 @@ Welcome to the **prectice_problems** repository. This project contains a curated
 *Maintained by [Hardik Bhammar](https://github.com/Hardik8491)*
 
 ---
-
-### How to apply this to your repo:
-1. Go to your [prectice_problems](https://github.com/Hardik8491/prectice_problems/tree/main) main page.
-2. Click on the **pencil icon** (edit) on the existing `README.md` file.
-3. Paste the content above and click **Commit changes**.
-
-Are you planning to add solutions to these in separate files, or do you want to keep them as problem statements only?
