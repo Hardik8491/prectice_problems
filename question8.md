@@ -58,13 +58,11 @@ chocobar
 300
 italian
 
-```id="ice-in"
-
+```
 ---
 
 ## 📤 Sample Output
 ```
-
 vanila
 [1, 2]
 
