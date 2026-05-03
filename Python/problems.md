@@ -296,6 +296,15 @@ todo.display_tasks()
 
 ## Practice Problem 1: 10thMarch
 
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Create `Employee` class with attributes: `employee_name,designation,salary,overTimeContribution,overTimeStatus`.
+   - Implement methods: `checkElegibility(m)`
+2. Create `Organization` class with attributes: `employee_list`.
+   - Implement methods: `checkElegibility(m)`
+
 ### Input / Output Examples:
 ```
 Input:
@@ -521,6 +530,13 @@ Aug
 ---
 
 ## Practice Problem 2: 11thJune
+
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Create `Store` class with attributes: `username,list1`.
+   - Implement methods: `findSpiciestPepper()`, `SortPepperByprice()`
 
 ### Input / Output Examples:
 ```
@@ -787,6 +803,12 @@ sort players by rank
 
 ## Practice Problem 3: 11thMarch
 
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Write a program to solve the problem based on the provided input and output format.
+
 ### Input / Output Examples:
 ```
 Input:
@@ -876,6 +898,12 @@ Finally, the code prints the substring starting from the calculated starting ind
 ---
 
 ## Practice Problem 4: 12thMarch
+
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Write a program to solve the problem based on the provided input and output format.
 
 ### Input / Output Examples:
 ```
@@ -981,6 +1009,12 @@ Output:
 
 ## Practice Problem 5: 13thMarch
 
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Write a program to solve the problem based on the provided input and output format.
+
 ### Input / Output Examples:
 ```
 Output:
@@ -1064,6 +1098,12 @@ s'teL ekat edoCteeL tsetnoc
 ---
 
 ## Practice Problem 6: 14thMarch
+
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Write a program to solve the problem based on the provided input and output format.
 
 ### Input / Output Examples:
 ```
@@ -1205,6 +1245,12 @@ Output:
 ---
 
 ## Practice Problem 7: 14thMarch_nightoutPractice
+
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Write a program to solve the problem based on the provided input and output format.
 
 ### Input / Output Examples:
 ```
@@ -1356,6 +1402,15 @@ print(max_occurance(string))
 
 ## Practice Problem 8: 15thMarch
 
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Create `Icecream` class with attributes: `id,price,name,quantityInGms,category`.
+   - Implement methods: `findMinimumIcecreambyprice_list(IcecreamList)`, `sortIcecreamByid()`
+2. Create `IcecreamStore` class with attributes: `IcecreamList`.
+   - Implement methods: `findMinimumIcecreambyprice_list(IcecreamList)`, `sortIcecreamByid()`
+
 ### Input / Output Examples:
 ```
 Input:
@@ -1460,6 +1515,15 @@ vanila
 ---
 
 ## Practice Problem 9: 15thMarch_nightoutPractice
+
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Create `CricketPlayer` class with attributes: `cplayerName , cplayedCountry , cplayerAge,cpCountryFrom`.
+   - Implement methods: `countPlayers(country)`, `getPlayerPlayedForMaxCountry()`
+2. Create `Solution` class with attributes: `listOfPlayers`.
+   - Implement methods: `countPlayers(country)`, `getPlayerPlayedForMaxCountry()`
 
 ### Input / Output Examples:
 ```
@@ -1610,6 +1674,15 @@ Mayank
 
 ## Practice Problem 10: 16thMarch
 
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Create `Container` class with attributes: `id,length,breadth,height,pricePerSq`.
+   - Implement methods: `volume()`, `findCCost(value)`, `findLargestC()`
+2. Create `PackagingCompany` class with attributes: `listOfContainer`.
+   - Implement methods: `findCCost(value)`, `findLargestC()`
+
 ### Input / Output Examples:
 ```
 Input:
@@ -1724,6 +1797,15 @@ Price Of Container with id 1 is :  240
 ---
 
 ## Practice Problem 11: 16thjuly
+
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Create `Album` class with attributes: `aname,sname,atrack,atype`.
+   - Implement methods: `m1()`
+2. Create `song` class with attributes: `list1`.
+   - Implement methods: `m1()`
 
 ### Input / Output Examples:
 ```
@@ -1847,6 +1929,15 @@ radar
 ---
 
 ## Practice Problem 12: 17thMarch
+
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Create `Service` class with attributes: `serviceId,regNo,model,mileage,isInsured,paymentRecvd`.
+   - Implement methods: `getTotalPaymentOfInsuredCars(ManufacturerName,stateCode,statename,mName)`
+2. Create `ServiceCentre` class with attributes: `mileagedict,serviceList`.
+   - Implement methods: `getTotalPaymentOfInsuredCars(ManufacturerName,stateCode,statename,mName)`
 
 ### Input / Output Examples:
 ```
@@ -2005,6 +2096,15 @@ MA TATA 4800.0
 
 ## Practice Problem 13: 18thMarch
 
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Create `iqtest` class with attributes: `id,name,mage,page`.
+   - Implement methods: `iqcalc()`
+2. Create `hex` class with attributes: `l`.
+   - Implement methods: `iqcalc()`
+
 ### Input / Output Examples:
 ```
 Input:
@@ -2086,6 +2186,12 @@ shona : 200.0
 
 ## Practice Problem 14: 20thMarch
 
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Write a program to solve the problem based on the provided input and output format.
+
 ### Solution Code:
 ```python
 # ninja to digital praction questions 
@@ -2099,6 +2205,12 @@ when i'll spare time for that
 ---
 
 ## Practice Problem 15: 21stApril
+
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Write a program to solve the problem based on the provided input and output format.
 
 ### Solution Code:
 ```python
@@ -2199,6 +2311,12 @@ Alphabets : 4
 
 ## Practice Problem 16: 21stApril_Afternoon_practice
 
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Write a program to solve the problem based on the provided input and output format.
+
 ### Input / Output Examples:
 ```
 Input:
@@ -2244,6 +2362,15 @@ hll wrld 123
 ---
 
 ## Practice Problem 17: 23rdMarch
+
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Create `Account` class with attributes: `branch_name , accountList`.
+   - Implement methods: `m1(wAmount)`, `m2(ucardNumber , upin, uwAmount )`
+2. Create `ATM` class with attributes: `branch_name , accountList`.
+   - Implement methods: `m2(ucardNumber , upin, uwAmount )`
 
 ### Solution Code:
 ```python
@@ -2356,6 +2483,12 @@ No account Exists
 ---
 
 ## Practice Problem 18: 24thMarch
+
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Write a program to solve the problem based on the provided input and output format.
 
 ### Input / Output Examples:
 ```
@@ -2691,6 +2824,12 @@ SHAKESPHERE 3
 
 ## Practice Problem 19: 25thMarch
 
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Create `Sponsor` class with attributes: `sName,sCompany,stieup,sCategory`.
+
 ### Input / Output Examples:
 ```
 Input:
@@ -2814,6 +2953,15 @@ Output:
 ---
 
 ## Practice Problem 20: 25thMarchNightOut
+
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Create `Movie` class with attributes: `id,director,rating,budget`.
+   - Implement methods: `findAvgBudgetByDirector(user_director)`
+2. Create `Solution` class with attributes: `list_movie`.
+   - Implement methods: `findAvgBudgetByDirector(user_director)`
 
 ### Input / Output Examples:
 ```
@@ -2988,6 +3136,12 @@ Output:
 
 ## Practice Problem 21: 26thApril
 
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Write a program to solve the problem based on the provided input and output format.
+
 ### Solution Code:
 ```python
 
@@ -2996,6 +3150,12 @@ Output:
 ---
 
 ## Practice Problem 22: 26thMarch
+
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Write a program to solve the problem based on the provided input and output format.
 
 ### Input / Output Examples:
 ```
@@ -3231,6 +3391,15 @@ hello
 ---
 
 ## Practice Problem 23: 26thMarchNightOut
+
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Create `Doctor` class with attributes: `docId,name,spec,consultfee`.
+   - Implement methods: `searchbyDocName(userName)`, `calc(userSpec)`
+2. Create `Hospital` class with attributes: `Docdb`.
+   - Implement methods: `searchbyDocName(userName)`, `calc(userSpec)`
 
 ### Input / Output Examples:
 ```
@@ -3498,6 +3667,15 @@ e hr!
 
 ## Practice Problem 24: 27thMarch
 
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Create `pan` class with attributes: `id , material,brand,price,capacity`.
+   - Implement methods: `CostliestPan(userMaterial)`, `discounted(userBrand)`
+2. Create `Solution` class with attributes: `list`.
+   - Implement methods: `CostliestPan(userMaterial)`, `discounted(userBrand)`
+
 ### Input / Output Examples:
 ```
 Input 1:
@@ -3682,6 +3860,15 @@ Output:
 
 ## Practice Problem 25: 27thMarchNightout
 
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Create `Player` class with attributes: `id,name,runs,playerType,matchType`.
+   - Implement methods: `findPlayerWithLowestRun(userPlayerType)`, `findPlayerbyMatchType(userMatchType)`
+2. Create `Solution` class with attributes: `list`.
+   - Implement methods: `findPlayerWithLowestRun(userPlayerType)`, `findPlayerbyMatchType(userMatchType)`
+
 ### Input / Output Examples:
 ```
 4
@@ -3810,6 +3997,13 @@ Lowest Run Player : 67
 
 ## Practice Problem 26: 29thMarch
 
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Create `sim` class with attributes: `id,cname,balance,rateperSec,circle`.
+   - Implement methods: `TransferCustomerCircle(userCircle1,userCircle2)`
+
 ### Input / Output Examples:
 ```
 5
@@ -3931,6 +4125,12 @@ Output:
 ---
 
 ## Practice Problem 27: 2ndMarch
+
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Write a program to solve the problem based on the provided input and output format.
 
 ### Input / Output Examples:
 ```
@@ -4127,6 +4327,15 @@ Invalid strings: 2
 
 ## Practice Problem 28: 30thMarch
 
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Create `area` class with attributes: `id,name,type`.
+   - Implement methods: `Ssort(userType)`
+2. Create `Solution` class with attributes: `list`.
+   - Implement methods: `Ssort(userType)`
+
 ### Input / Output Examples:
 ```
 Input:
@@ -4241,6 +4450,15 @@ Output:
 ---
 
 ## Practice Problem 29: 31thMarch
+
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Create `Area` class with attributes: `id,name,type`.
+   - Implement methods: `c1(userType)`
+2. Create `Solution` class with attributes: `list`.
+   - Implement methods: `c1(userType)`
 
 ### Input / Output Examples:
 ```
@@ -4379,6 +4597,15 @@ Alphabets:3
 
 ## Practice Problem 30: 3rdApril
 
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Create `Area` class with attributes: `id,name,type`.
+   - Implement methods: `c1(userType)`, `c2(string1)`
+2. Create `Solution` class with attributes: `list`.
+   - Implement methods: `c1(userType)`, `c2(string1)`
+
 ### Solution Code:
 ```python
 class Area:
@@ -4430,6 +4657,12 @@ ans2 = obj2.c2(string1)
 ---
 
 ## Practice Problem 31: 3rdMarch
+
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Write a program to solve the problem based on the provided input and output format.
 
 ### Input / Output Examples:
 ```
@@ -4560,6 +4793,15 @@ Not Found
 ---
 
 ## Practice Problem 32: 4thMarch
+
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Create `Scholar` class with attributes: `scholarId,scholarName,State,marks_list`.
+   - Implement methods: `F1(list_Scholar,g)`
+2. Create `ScholarResult` class with attributes: `attributes`.
+   - Implement methods: `F1(list_Scholar,g)`
 
 ### Input / Output Examples:
 ```
@@ -4837,6 +5079,12 @@ goa 100: 0
 
 ## Practice Problem 33: 5thMarch
 
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Write a program to solve the problem based on the provided input and output format.
+
 ### Input / Output Examples:
 ```
 input 1:
@@ -5048,6 +5296,12 @@ output:
 
 ## Practice Problem 34: 6thMarch
 
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Write a program to solve the problem based on the provided input and output format.
+
 ### Input / Output Examples:
 ```
 Input:
@@ -5171,6 +5425,12 @@ output:
 ---
 
 ## Practice Problem 35: 6thMay
+
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Write a program to solve the problem based on the provided input and output format.
 
 ### Input / Output Examples:
 ```
@@ -5344,6 +5604,12 @@ Ravi
 
 ## Practice Problem 36: 7thMarch
 
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Write a program to solve the problem based on the provided input and output format.
+
 ### Input / Output Examples:
 ```
 Output:
@@ -5366,6 +5632,12 @@ hi
 ---
 
 ## Practice Problem 37: 9thMarch
+
+### Problem Statement
+Design a system to model the entities and implement the required business logic.
+
+### Requirements:
+1. Write a program to solve the problem based on the provided input and output format.
 
 ### Input / Output Examples:
 ```
