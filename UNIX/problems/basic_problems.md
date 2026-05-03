@@ -1,9 +1,6 @@
-Here are **TCS-style UNIX problems** (very practical + commonly asked) 👇
-I’m not giving random theory—these are **actual pattern-based questions** you’ll face.
+# UNIX Problems (with Solutions)
 
----
-
-# 🔥 TCS UNIX Problems (with Solutions)
+Here are practical UNIX problems commonly asked in technical interviews and assessments:
 
 ---
 
@@ -185,9 +182,9 @@ sed '/^$/d' file.txt
 
 ---
 
-# 🔥 MOST IMPORTANT (TCS Favorite)
+# Most Important Topics
 
-👉 These 5 are asked again & again:
+These 5 are frequently asked:
 
 1. `awk '{print $NF}'`
 2. `awk '!seen[$0]++'`
@@ -197,9 +194,9 @@ sed '/^$/d' file.txt
 
 ---
 
-# 🚀 Pattern Understanding (Very Important)
+# Pattern Understanding (Very Important)
 
-TCS questions mostly test:
+Interview questions mostly test:
 
 * Filtering → `grep`
 * Processing → `awk`
