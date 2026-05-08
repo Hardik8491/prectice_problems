@@ -893,3 +893,954 @@ N                    # Previous match
 
 ---
 
+Complete AWK Functions Guide - Zero to Advanced
+
+Table of Contents
+
+1. Introduction to AWK
+2. String Functions (Complete)
+3. Math Functions (Complete)
+4. Array Functions (Complete)
+5. I/O Functions (Complete)
+6. Time Functions
+7. Bit Manipulation Functions
+8. Type Conversion Functions
+9. Special Variables
+10. Practical Examples
+
+---
+
+Introduction to AWK
+
+AWK is a pattern-directed scanning and processing language. Named after creators: Aho, Weinberger, Kernighan.
+
+Basic Structure
+
+```bash
+awk 'BEGIN { initialization } pattern { action } END { cleanup }' file
+```
+
+Running AWK
+
+```bash
+# Method 1: Command line
+awk '{print $1}' file.txt
+
+# Method 2: From script
+awk -f script.awk file.txt
+
+# Method 3: One-liner with variables
+awk -v var=10 '{print $1 * var}' file.txt
+```
+
+---
+
+String Functions (Complete)
+
+1. length() - Get string length
+
+```bash
+# Basic usage
+awk '{print length($0)}' file.txt  # Length of each line
+awk '{print length($1)}' file.txt  # Length of first field
+
+# With variable
+awk '{len = length($2); print "Field 2 has", len, "characters"}'
+
+# Count empty lines
+awk 'length($0) == 0 {count++} END {print "Empty lines:", count}' file.txt
+
+# Validate minimum length
+awk 'length($1) >= 5 {print $1}' file.txt
+
+# Characters per word
+awk '{for(i=1;i<=NF;i++) print length($i)}' file.txt
+```
+
+2. substr(s, start, length) - Extract substring
+
+```bash
+# Extract from position to end
+awk '{print substr($1, 3)}' file.txt  # From 3rd char to end
+awk '{print substr($1, 2, 5)}' file.txt  # 5 chars from position 2
+
+# Get first 3 characters
+awk '{print substr($0, 1, 3)}' file.txt
+
+# Get last 3 characters
+awk '{print substr($0, length($0)-2)}' file.txt
+
+# Extract domain from email
+awk '{print substr($1, index($1,"@")+1)}' emails.txt
+
+# Extract based on positions
+echo "John Doe 30" | awk '{name = substr($0, 1, 8); age = substr($0, 9); print name, age}'
+
+# Dynamic extraction
+awk '{start = index($0, "error"); if(start) print substr($0, start)}' log.txt
+```
+
+3. index(s, t) - Find position of substring
+
+```bash
+# Find position (returns 1-based index)
+awk '{print index($0, "error")}' file.txt
+
+# Check if string contains pattern
+awk 'index($0, "warning") > 0 {print NR, $0}' file.txt
+
+# Extract after a specific pattern
+awk '{
+    pos = index($0, "=");
+    if(pos > 0) print substr($0, pos+1)
+}' config.txt
+
+# Multiple occurrences (find all positions)
+awk '{
+    line = $0;
+    pattern = "a";
+    pos = 1;
+    while(pos = index(line, pattern)) {
+        print "Found at:", pos;
+        line = substr(line, pos+1);
+    }
+}' file.txt
+
+# Extract between two patterns
+awk '{
+    start = index($0, "[");
+    end = index($0, "]");
+    if(start && end && end > start) {
+        print substr($0, start+1, end-start-1)
+    }
+}' file.txt
+```
+
+4. split(s, array, delimiter) - Split string into array
+
+```bash
+# Basic split on space
+awk '{split($0, arr, " "); print arr[1]}' file.txt
+
+# Split on comma
+awk '{split($0, fields, ","); print fields[1], fields[3]}' csvfile.txt
+
+# Split with regex delimiter
+awk '{split($0, parts, /[ ,;:]+/); print parts[2]}' file.txt
+
+# Count number of fields after split
+awk '{n = split($0, arr, ","); print "CSV has", n, "fields"}'
+
+# Split and loop
+awk '{
+    split($0, words, " ");
+    for(i in words)
+        print i ":", words[i]
+}'
+
+# Split multiple times
+awk '{
+    split($1, first, "-");
+    split($2, last, "-");
+    print first[1], last[1]
+}'
+
+# Split into array and use length
+awk '{n = split($0, arr, " "); for(i=1;i<=n;i++) print arr[i]}'
+
+# Preserve split count
+awk '{n = split($0, arr); for(i=1;i<=n;i++) if(arr[i] ~ /^[A-Z]/) print arr[i]}'
+
+# Split with empty fields preserved
+echo "a,,b,c" | awk '{n = split($0, arr, ",", seps); for(i=1;i<=n;i++) print arr[i]}'
+```
+
+5. tolower(string) - Convert to lowercase
+
+```bash
+# Case-insensitive comparison
+awk 'tolower($1) == "admin" {print $0}' file.txt
+
+# Standardize data
+awk '{$1 = tolower($1); print}' file.txt
+
+# Convert whole line
+awk '{print tolower($0)}' file.txt
+
+# Case-insensitive search
+awk 'tolower($0) ~ /error/ {print}' log.txt
+
+# Convert first character only
+awk '{print toupper(substr($1,1,1)) tolower(substr($1,2))}' names.txt
+
+# Create index keys
+awk '{key = tolower($1); data[key] = $0} END {for(k in data) print k, data[k]}'
+```
+
+6. toupper(string) - Convert to uppercase
+
+```bash
+# Convert field to uppercase
+awk '{$3 = toupper($3); print}' file.txt
+
+# Make CSV headers uppercase
+awk 'NR==1 {for(i=1;i<=NF;i++) $i = toupper($i)} {print}' data.csv
+
+# Generate SQL query
+awk '{print "INSERT INTO users VALUES("\"" toupper($1) "\", " $2 ");"}' users.txt
+
+# Environment variable style
+awk '{print toupper($1) "=" $2}' config.txt
+```
+
+7. sub(regex, replacement, target) - Replace first match
+
+```bash
+# Replace first occurrence
+awk '{sub("old", "new"); print}' file.txt
+
+# Replace in specific field
+awk '{sub(/old/, "new", $2); print}' file.txt
+
+# Conditional replace
+awk '/pattern/ {sub(/old/, "new")} {print}' file.txt
+
+# Count replacements
+awk '{count += sub(/a/, "b"); print} END {print count}' file.txt
+
+# Replace with variable
+awk -v old="foo" -v new="bar" '{sub(old, new); print}' file.txt
+
+# Use capture groups
+awk '{sub(/([0-9]+)/, "NUM_\\1"); print}' file.txt
+
+# Replace first word only
+awk '{sub(/^[a-zA-Z]+/, "WORD"); print}' file.txt
+```
+
+8. gsub(regex, replacement, target) - Replace all matches
+
+```bash
+# Replace globally
+awk '{gsub(/[0-9]/, "#"); print}' file.txt
+
+# Remove all spaces
+awk '{gsub(/ /, ""); print}' file.txt
+
+# Replace multiple patterns
+awk '{gsub(/[[:punct:]]/, ""); print}' file.txt
+
+# Count total replacements
+awk '{count += gsub(/[aeiou]/, "X"); print} END {print "Vowels replaced:", count}'
+
+# Collapse multiple spaces
+awk '{gsub(/ +/, " "); print}' file.txt
+
+# Escape special characters
+awk '{gsub(/\./, "_"); print}' filenames.txt
+
+# Replace in array
+awk '{
+    split($0, arr, " ");
+    for(i in arr) gsub(/[^0-9]/, "", arr[i]);
+    print arr[1], arr[2]
+}'
+
+# Remove HTML tags
+awk '{gsub(/<[^>]*>/, ""); print}' webpage.html
+
+# Clean CSV fields
+awk '{gsub(/^"|"$/, "", $1); gsub(/^"|"$/, "", $2); print}' data.csv
+```
+
+9. match(string, regex, array) - Regular expression match
+
+```bash
+# Check if matches
+awk 'match($0, /error/) {print "Found error at line", NR}'
+
+# Get match position and length
+awk '{
+    if(match($0, /[0-9]+/)) {
+        print "Match at:", RSTART;
+        print "Length:", RLENGTH;
+        print "Value:", substr($0, RSTART, RLENGTH);
+    }
+}'
+
+# Extract capture groups with array
+awk '{
+    match($0, /([a-z]+)=([0-9]+)/, arr);
+    print "Key:", arr[1];
+    print "Value:", arr[2];
+}'
+
+# Extract email addresses
+awk '{
+    while(match($0, /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/)) {
+        print substr($0, RSTART, RLENGTH);
+        $0 = substr($0, RSTART+RLENGTH);
+    }
+}'
+
+# Extract IP addresses
+awk 'match($0, /[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/) {
+    ip = substr($0, RSTART, RLENGTH);
+    print "IP:", ip;
+}'
+
+# Extract quoted strings
+awk '{
+    while(match($0, /"[^"]*"/)) {
+        print substr($0, RSTART+1, RLENGTH-2);
+        $0 = substr($0, RSTART+RLENGTH);
+    }
+}'
+
+# Multiple matches with positions
+awk '{
+    pos = 1;
+    line = $0;
+    while(match(line, /[aeiou]/)) {
+        print "Vowel at global position:", pos + RSTART - 1;
+        pos += RSTART;
+        line = substr(line, RSTART+RLENGTH);
+    }
+}'
+```
+
+10. sprintf(format, expr1, expr2...) - Format string
+
+```bash
+# Number formatting
+awk '{num = sprintf("%05d", $1); print num}' file.txt
+
+# Floating point precision
+awk '{val = sprintf("%.2f", $1/3); print val}' file.txt
+
+# Hexadecimal conversion
+awk '{hex = sprintf("0x%X", $1); print hex}' file.txt
+
+# Build formatted output
+awk '{
+    line = sprintf("%-10s %3d %8.2f", $1, $2, $3);
+    print line
+}'
+
+# Create filenames
+awk '{filename = sprintf("data_%04d.txt", NR); print filename > filename}'
+
+# SQL insert statements
+awk '{sql = sprintf("INSERT INTO table VALUES('\''%s'\'', %d);", $1, $2); print sql}'
+
+# JSON output
+awk '{
+    json = sprintf("{\"name\":\"%s\",\"age\":%d}", $1, $2);
+    print json
+}'
+
+# Left and right alignment
+awk '{print sprintf("%-20s %20s", $1, $2)}' file.txt
+
+# Format with leading zeros
+awk '{print sprintf("%03d-%02d-%04d", $1, $2, $3)}' dates.txt
+
+# Scientific notation
+awk '{print sprintf("%10.2e", $1)}' numbers.txt
+```
+
+11. strtonum(str) - Convert string to number
+
+```bash
+# Convert hex string
+awk '{num = strtonum("0x" $1); print num}' hex.txt
+
+# Convert octal
+awk '{num = strtonum("0" $1); print num}' octal.txt
+
+# Handle different number formats
+awk '{
+    if($1 ~ /^0x/) print strtonum($1);
+    else if($1 ~ /^0/) print strtonum($1);
+    else print $1 + 0;
+}'
+
+# Auto-detect and convert
+awk '{sum += strtonum($1)} END {print sum}'
+```
+
+12. asort(s, d) - Sort array by value
+
+```bash
+# Sort array values
+awk '{
+    arr[NR] = $1
+}
+END {
+    n = asort(arr)
+    for(i=1;i<=n;i++) print arr[i]
+}'
+
+# Sort with original indices lost
+awk '{
+    a[NR] = $1
+}
+END {
+    n = asort(a, b)
+    for(i=1;i<=n;i++) print i, b[i]
+}'
+
+# Sort strings
+awk '{
+    words[$1] = length($1)
+}
+END {
+    n = asort(words)
+    for(i=1;i<=n;i++) print words[i]
+}'
+```
+
+13. asorti(s, d) - Sort array by index
+
+```bash
+# Sort by key
+awk '{
+    data[$1] = $2
+}
+END {
+    n = asorti(data, sorted)
+    for(i=1;i<=n;i++) print sorted[i], data[sorted[i]]
+}'
+
+# Reverse sort (by index)
+awk '{
+    data[$1] = $2
+}
+END {
+    n = asorti(data, sorted)
+    for(i=n;i>=1;i--) print sorted[i], data[sorted[i]]
+}'
+```
+
+---
+
+Math Functions (Complete)
+
+1. sqrt(x) - Square root
+
+```bash
+# Basic sqrt
+awk '{print sqrt($1)}' numbers.txt
+
+# Pythagorean theorem
+awk '{c = sqrt($1^2 + $2^2); print c}'
+
+# Check perfect squares
+awk 'sqrt($1) == int(sqrt($1)) {print $1, "is perfect square"}'
+
+# Distance between points
+awk '{dist = sqrt(($2-$1)^2 + ($4-$3)^2); print dist}'
+
+# Standard deviation
+awk '{
+    sum += $1; sum_sq += $1^2; n++
+}
+END {
+    mean = sum/n;
+    sd = sqrt((sum_sq - (sum^2)/n)/(n-1));
+    print "Mean:", mean, "SD:", sd
+}'
+```
+
+2. rand() - Random number (0 to 1)
+
+```bash
+# Generate random number
+awk 'BEGIN{print rand()}'
+
+# Need srand for different values
+awk 'BEGIN{srand(); print rand()}'
+
+# Random integer between 1 and 100
+awk 'BEGIN{srand(); print int(rand() * 100) + 1}'
+
+# Randomly sample lines
+awk 'BEGIN{srand()} rand() < 0.1 {print}' largefile.txt
+
+# Generate random password
+awk 'BEGIN{
+    srand();
+    chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+    len = length(chars);
+    for(i=1;i<=8;i++) {
+        printf substr(chars, int(rand() * len) + 1, 1);
+    }
+    print "";
+}'
+
+# Random shuffle lines
+awk 'BEGIN{srand()} {print rand(), $0}' file.txt | sort -n | cut -d' ' -f2-
+
+# Monte Carlo pi approximation
+awk 'BEGIN{
+    srand();
+    n=1000000;
+    for(i=1;i<=n;i++) {
+        x=rand(); y=rand();
+        if(x*x + y*y <= 1) count++;
+    }
+    pi=4*count/n;
+    print pi
+}'
+```
+
+3. srand([expr]) - Set random seed
+
+```bash
+# Seed with time
+awk 'BEGIN{srand(); print rand()}'
+
+# Seed with specific value for reproducible results
+awk 'BEGIN{srand(42); print rand(); print rand()}'
+
+# Seed with process ID
+awk 'BEGIN{srand(12345); for(i=1;i<=5;i++) print rand()}'
+
+# Generate same sequence
+awk 'BEGIN{srand(1); for(i=1;i<=3;i++) print rand()}'
+awk 'BEGIN{srand(1); for(i=1;i<=3;i++) print rand()}'  # Same output
+
+# Random without seed (not recommended)
+awk 'BEGIN{for(i=1;i<=5;i++) print rand()}'  # Same each run
+```
+
+4. int(x) - Integer part (truncates toward zero)
+
+```bash
+# Truncate decimal
+awk '{print int($1)}' numbers.txt
+
+# Floor (int works like floor for positive numbers)
+awk '{print int($1)}'
+
+# Integer division
+awk '{result = int($1 / $2); print result}'
+
+# Round to nearest integer
+awk '{rounded = int($1 + 0.5); print rounded}'
+
+# Check if integer
+awk 'int($1) == $1 {print $1, "is integer"}'
+
+# Extract whole and fractional parts
+awk '{whole = int($1); fraction = $1 - whole; print whole, fraction}'
+
+# Modulo with int
+awk '{result = $1 - int($1/5)*5; print result}'
+```
+
+5. sin(x) - Sine (x in radians)
+
+```bash
+# Basic sine
+awk '{print sin($1)}' angles.txt
+
+# Sine degrees conversion
+awk '{rad = $1 * 3.14159/180; print sin(rad)}' degrees.txt
+
+# Wave generation
+awk 'BEGIN{for(i=0;i<=360;i+=10) print i, sin(i*3.14159/180)}'
+
+# Fourier transform simulation
+awk '{
+    for(f=1;f<=10;f++) {
+        magnitude[f] += $1 * sin(f * $2 * 3.14159/180);
+    }
+}
+END {
+    for(f=1;f<=10;f++) print f, magnitude[f]
+}'
+```
+
+6. cos(x) - Cosine (x in radians)
+
+```bash
+# Basic cosine
+awk '{print cos($1)}'
+
+# Law of cosines
+awk '{c = sqrt($1^2 + $2^2 - 2*$1*$2*cos($3)); print c}'
+
+# Dot product
+awk '{dot = $1*$3 + $2*$4; norm = sqrt($1^2+$2^2)*sqrt($3^2+$4^2);
+      cos_angle = dot/norm; print cos_angle}'
+
+# Generate cosine wave
+awk 'BEGIN{for(i=0;i<=360;i+=10) print i, cos(i*3.14159/180)}'
+```
+
+7. atan2(y, x) - Arc tangent (returns radians)
+
+```bash
+# Calculate angle from coordinates
+awk '{angle = atan2($2, $1) * 180/3.14159; print angle}'
+
+# Cartesian to polar
+awk '{r = sqrt($1^2 + $2^2); theta = atan2($2, $1); print r, theta}'
+
+# Direction between points
+awk '{dx = $3-$1; dy = $4-$2; heading = atan2(dy, dx); print heading}'
+
+# Slope to angle
+awk '{angle = atan2($2, 1) * 180/3.14159; print "Slope", $1, "=", angle, "degrees"}'
+```
+
+8. log(x) - Natural logarithm (base e)
+
+```bash
+# Natural log
+awk '{print log($1)}' numbers.txt
+
+# Log base 10
+awk '{print log($1)/log(10)}' numbers.txt
+
+# Log base 2
+awk '{print log($1)/log(2)}' numbers.txt
+
+# Exponential growth
+awk '{growth = exp(log($1) * $2); print growth}'
+
+# Entropy calculation
+awk '{sum+=$1} END {
+    for(i in data) {
+        p = data[i]/sum;
+        entropy -= p * log(p)/log(2);
+    }
+    print entropy
+}'
+```
+
+9. exp(x) - Exponential (e^x)
+
+```python
+# Basic exponential
+awk '{print exp($1)}' numbers.txt
+
+# Compound interest
+awk '{amount = $1 * exp($2 * $3); print "$" amount}' # P, rate, time
+
+# Normal distribution
+awk '{x = $1; pdf = (1/sqrt(2*3.14159)) * exp(-x*x/2); print pdf}'
+
+# Logistic function
+awk '{logistic = 1/(1+exp(-$1)); print logistic}'
+```
+
+10. Additional Math Operations
+
+```bash
+# No built-in pow, use ** or ^
+awk '{print $1 ** 2}'  # Square
+awk '{print $1 ^ 3}'   # Cube
+
+# Absolute value (no built-in, use ternary)
+awk '{abs = ($1 < 0) ? -$1 : $1; print abs}'
+
+# Min/Max (no built-in)
+awk '{min = ($1 < min) ? $1 : min; max = ($1 > max) ? $1 : max} END {print min, max}'
+
+# Rounding (no built-in)
+awk '{rounded = int($1 + 0.5); print rounded}'
+
+# Ceiling (no built-in)
+awk '{ceil = ($1 > int($1)) ? int($1)+1 : $1; print ceil}'
+
+# Floor (use int for positive, otherwise adjust)
+awk '{floor = ($1 >= 0) ? int($1) : int($1)-1; print floor}'
+
+# Factorial implementation
+awk 'function fact(n) {return n<=1 ? 1 : n*fact(n-1)} {print fact($1)}'
+
+# Fibonacci
+awk 'function fib(n) {return n<=1 ? n : fib(n-1)+fib(n-2)} {print fib($1)}'
+```
+
+---
+
+Array Functions (Complete)
+
+1. Using Arrays
+
+```bash
+# Associative arrays (any index type)
+awk '{count[$1]++} END {for(name in count) print name, count[name]}'
+
+# Numeric arrays
+awk '{
+    arr[NR] = $1
+}
+END {
+    for(i=1;i<=NR;i++) print arr[i]
+}'
+
+# Multi-dimensional (simulated with string concatenation)
+awk '{matrix[$1","$2] = $3} END {print matrix["1,2"]}'
+
+# Check if key exists
+awk '{
+    if("admin" in users) print "admin exists";
+    else print "not found"
+}'
+
+# Delete element
+awk '{delete arr[$1]} END {for(i in arr) print i}'
+
+# Delete entire array
+awk '{delete arr} END {print length(arr)}'
+```
+
+2. split() - Already covered in string functions
+
+```bash
+# Separator preservation
+awk '{n = split($0, arr, /[ ,]+/, seps); for(i=1;i<=n;i++) print arr[i], seps[i]}'
+
+# Split with regex
+awk '{n = split($0, arr, /[[:space:]]+/); print arr[2]}'
+
+# Split into named array
+awk '{
+    split($0, fields, "|");
+    name = fields[1];
+    age = fields[2];
+    print name, age
+}'
+```
+
+3. length(array) - Get array size
+
+```bash
+# Count unique values
+awk '{unique[$1]++} END {print "Unique:", length(unique)}'
+
+# Check if array empty
+awk '{count[$1]++} END {if(length(count)==0) print "No data"}'
+```
+
+4. delete - Remove array elements
+
+```bash
+# Delete single element
+awk '{arr[$1] = $2} END {delete arr["old"]; for(i in arr) print i}'
+
+# Delete entire array
+awk '{arr[$1] = $2} END {delete arr; print length(arr)}'
+
+# Conditional deletion
+awk '{
+    arr[NR] = $1
+}
+END {
+    for(i in arr) if(arr[i] < 0) delete arr[i]
+    for(i in arr) print arr[i]
+}'
+```
+
+---
+
+I/O Functions (Complete)
+
+1. print - Output
+
+```bash
+# Basic print
+awk '{print}' file.txt
+awk '{print $0}' file.txt
+
+# Print with separator
+awk '{print $1, $2}' file.txt  # Space separator
+awk '{print $1 "," $2}' file.txt  # No separator
+
+# Print with literal text
+awk '{print "Name:", $1, "Age:", $2}'
+
+# Print to file
+awk '{print $0 > "output.txt"}' file.txt
+
+# Append to file
+awk '{print $0 >> "log.txt"}' file.txt
+
+# Print to different files based on condition
+awk '{print > ($1 ~ /^A/ ? "a.txt" : "other.txt")}' file.txt
+```
+
+2. printf - Formatted output
+
+```bash
+# Format specifiers
+awk '{printf "%s\n", $1}' file.txt
+awk '{printf "%-10s %5d %8.2f\n", $1, $2, $3}'
+
+# Escape characters
+awk '{printf "Line %d:\t%s\n", NR, $0}'
+
+# Dynamic width
+awk '{width = length($1); printf "%*s\n", width+2, $1}'
+
+# Print without newline
+awk '{printf "Processing..."; printf "done\n"}'
+
+# Hexadecimal
+awk '{printf "0x%X\n", $1}'
+
+# Octal
+awk '{printf "0%o\n", $1}'
+
+# Scientific notation
+awk '{printf "%10.2e\n", $1}'
+
+# Right align
+awk '{printf "%10s\n", $1}'
+
+# Left align
+awk '{printf "%-10s\n", $1}'
+
+# Zero padding
+awk '{printf "%05d\n", $1}'
+
+# Plus sign for positive numbers
+awk '{printf "%+d\n", $1}'
+```
+
+3. getline - Read next line (advanced)
+
+```bash
+# Basic getline
+awk '{getline; print $0}' file.txt  # Skip every other line
+
+# Getline into variable
+awk '{getline line; print "Previous:", $0, "Next:", line}'
+
+# Getline from file
+awk 'BEGIN {while(getline < "data.txt") count++} END {print count}'
+
+# Getline with pipe
+awk 'BEGIN {while("ls" | getline) print "File:", $0}'
+
+# Check return value
+awk '{
+    if((getline) <= 0) print "End of file or error"
+}'
+
+# Multiple file processing
+awk '{
+    if(NR%10==0) getline < "extra.txt";
+    print
+}'
+
+# Error handling
+awk '{
+    rc = getline;
+    if(rc == 0) print "EOF";
+    else if(rc < 0) print "Error";
+    else print $0
+}'
+```
+
+4. close() - Close file or pipe
+
+```bash
+# Close output file
+awk '{print > "temp.txt"; if(NR%1000==0) close("temp.txt")}' bigfile.txt
+
+# Close input file
+awk 'FNR==1 {close("temp.txt")} {print > "temp.txt"}'
+
+# Close pipe
+awk '{print | "sort"; close("sort")}' file.txt
+
+# System resource management
+awk '{
+    for(i=1;i<=NF;i++) {
+        cmd = "md5sum " $i;
+        cmd | getline hash;
+        close(cmd);
+        print $i, hash
+    }
+}'
+```
+
+5. fflush() - Flush buffer
+
+```bash
+# Force output
+awk '{print; fflush()}' file.txt
+
+# Flush specific file
+awk '{print > "out.txt"; fflush("out.txt")}'
+
+# Flush all
+awk '{print; fflush()}' largefile.txt
+
+# Real-time monitoring
+awk '{print strftime(), $0; fflush()}' logfile.txt
+```
+
+6. system() - Execute system command
+
+```bash
+# Run command
+awk 'BEGIN{system("date")}'
+
+# Use system output (better to use getline)
+awk '{system("echo Processed: " $0)}'
+
+# Check command status
+awk '{
+    rc = system("test -f " $1);
+    if(rc == 0) print $1, "exists";
+    else print $1, "missing"
+}'
+
+# Create directories
+awk '{
+    system("mkdir -p " $1 "/backup");
+    print "Created directory for", $1
+}'
+
+# Copy files
+awk '{
+    cmd = "cp " $1 " " $2;
+    if(system(cmd) == 0) print "Copied", $1, "to", $2
+}'
+
+# Multiple commands
+awk '{
+    cmd = "convert " $1 " -resize 50% resized_" $1;
+    system(cmd);
+    print "Processed", $1
+}' images.txt
+```
+
+---
+
+Time Functions (GNU AWK)
+
+1. systime() - Current Unix timestamp
+
+```bash
+# Get timestamp
+awk 'BEGIN{print systime()}'
+
+# Measure execution time
+awk 'BEGIN{start=systime()} {count++} END{print "Time:", systime()-start, "seconds"}'
+
+# Add timestamps to lines
+awk '{print systime(), $0}' log.txt
+```
+
+2. strftime([format[, timestamp]]) - Format time
+
+```bash
+# Current date/time
+awk 'BEGIN
